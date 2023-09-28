@@ -1,0 +1,10 @@
+<div class="d-flex p-2">
+  <mat-card *ngFor="let item of data" style="margin: 1rem 0; width: 300px;">
+    <mat-card-content>
+      <p>{{item.name}}</p>
+      <p>{{item.description}}</p>
+      <p>{{item.type}}</p>
+      <button type="button" class="btn btn-primary">Editar</button>
+    </mat-card-content>
+  </mat-card>
+</div>
