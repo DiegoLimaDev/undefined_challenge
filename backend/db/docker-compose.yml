@@ -1,0 +1,18 @@
+##docker-compose -f docker-compose.yml up -d
+
+version: '3.1'
+
+services:
+  undefined-challange-database:
+    container_name: undefined-challenge-database
+    image: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: 'undefined-challenge-db'
+      POSTGRES_PASSWORD: '1234'
+      POSTGRES_USER: 'postgres'
+    networks:
+      default:
+        aliases:
+          - postgres.service
