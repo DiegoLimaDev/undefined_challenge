@@ -1,0 +1,16 @@
+<form class="d-flex flex-column mb-3" [formGroup]="postForm" (ngSubmit)="CreatePokemon()">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+      <input matInput name="name" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput name="description" formControlName="description">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <input matInput name="type" formControlName="type">
+    </mat-form-field>
+    <button type="button" class="btn btn-primary" (click)="CreatePokemon()">Criar</button>
+</form>
+

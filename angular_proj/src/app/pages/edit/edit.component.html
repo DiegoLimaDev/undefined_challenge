@@ -1,0 +1,16 @@
+<form class="d-flex flex-column mb-3" [formGroup]="postForm" (ngSubmit)="editPokemon(pokemon.id)">
+  <mat-form-field >
+    <mat-label>Name</mat-label>
+      <input matInput name="name" [value]="pokemon.name" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput name="description"  [value]="pokemon.description" formControlName="description">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <input matInput name="type" [value]="pokemon.type" formControlName="type">
+    </mat-form-field>
+    <button type="button" class="btn btn-primary" (click)="editPokemon(pokemon.id)">Salvar</button>
+</form>
+

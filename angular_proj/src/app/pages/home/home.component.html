@@ -1,10 +1,15 @@
-<div class="d-flex p-2">
+<div class="d-flex p-2 container flex-wrap">
   <mat-card *ngFor="let item of data" style="margin: 1rem 0; width: 300px;">
     <mat-card-content>
       <p>{{item.name}}</p>
       <p>{{item.description}}</p>
       <p>{{item.type}}</p>
-      <button type="button" class="btn btn-primary">Editar</button>
+      <div class="d-flex row-flex">
+        <button (click)="navigate(item.id)" type="button" class="btn btn-primary">Editar</button>
+        <button (click)="DeletePokemon(item.id)" type="button" class="btn btn-danger">Delete</button>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>
+<button (click)="this.router.navigate(['create'])" type="button" class="btn btn-primary d-block mx-auto">Criar pokemon</button>
+
