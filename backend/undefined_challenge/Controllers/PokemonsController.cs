@@ -35,7 +35,7 @@ namespace undefined_challenge.Controllers
     public async Task<ActionResult<string>> CreatePokemon(Pokemon pokemon)
     {
 
-      _context.Pokemons.Add(pokemon);
+      await _context.Pokemons.AddAsync(pokemon);
       await _context.SaveChangesAsync();
 
       return $"{pokemon.Name} has been created with the id {pokemon.Id}";
@@ -65,7 +65,7 @@ namespace undefined_challenge.Controllers
       if (pokemon == null) return "not found";
 
       _context.Pokemons.Remove(pokemon);
-      _context.SaveChanges();
+      await _context.SaveChangesAsync();
 
       return $"Pokemon with the {id} has been deleted";
     }
