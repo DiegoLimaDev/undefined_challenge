@@ -32,17 +32,17 @@ namespace undefined_challenge.Controllers
     }
 
     [HttpPost]
-    public async Task<ActionResult<string>> CreatePokemon(Pokemon pokemon)
+    public async Task<ActionResult<dynamic>> CreatePokemon(Pokemon pokemon)
     {
 
-      await _context.Pokemons.AddAsync(pokemon);
+      var entity = await _context.Pokemons.AddAsync(pokemon);
       await _context.SaveChangesAsync();
 
-      return $"{pokemon.Name} has been created with the id {pokemon.Id}";
+      return entity;
     }
 
     [HttpPut("{id}")]
-    public async Task<string> EditPokemon(int id, [FromBody]Pokemon pokemon)
+    public async Task<dynamic> EditPokemon(int id, [FromBody]Pokemon pokemon)
     {
       var entity = await _context.Pokemons.FindAsync(id);
 
@@ -54,11 +54,11 @@ namespace undefined_challenge.Controllers
 
       await _context.SaveChangesAsync();
 
-      return "editado";
+      return entity;
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult<string>> DeletePokemon(int id)
+    public async Task<ActionResult<dynamic>> DeletePokemon(int id)
     {
       var pokemon = await _context.Pokemons.FindAsync(id);
 
@@ -67,7 +67,7 @@ namespace undefined_challenge.Controllers
       _context.Pokemons.Remove(pokemon);
       await _context.SaveChangesAsync();
 
-      return $"Pokemon with the {id} has been deleted";
+      return pokemon;
     }
     }
 }
