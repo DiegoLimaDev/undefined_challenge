@@ -23,7 +23,8 @@ type FormValues = {
 };
 
 export const CreatePokemonDialog = ({ isOpen, onClick }: props) => {
-  const { register, handleSubmit } = useForm<FormValues>();
+  const { register, handleSubmit, getValues } = useForm<FormValues>();
+  const { name, description, type } = getValues();
 
   const onSubmit = async (data: FormValues) => {
     const url = await `http://localhost:5228/api/pokemons/`;
@@ -33,6 +34,7 @@ export const CreatePokemonDialog = ({ isOpen, onClick }: props) => {
       type: data.type,
     });
     window.location.reload();
+    onClick();
   };
 
   return (
@@ -45,6 +47,7 @@ export const CreatePokemonDialog = ({ isOpen, onClick }: props) => {
               margin="normal"
               type="text"
               id="name"
+              defaultValue={''}
               placeholder="Pokemon name"
               {...register('name')}
             />
@@ -52,6 +55,7 @@ export const CreatePokemonDialog = ({ isOpen, onClick }: props) => {
               margin="normal"
               type="text"
               id="description"
+              defaultValue={''}
               placeholder="Pokemon description"
               {...register('description')}
             />
@@ -59,12 +63,20 @@ export const CreatePokemonDialog = ({ isOpen, onClick }: props) => {
               margin="normal"
               type="text"
               id="type"
+              defaultValue={''}
               placeholder="Pokemon type"
               {...register('type')}
             />
           </Stack>
           <DialogActions>
-            <Button variant="contained" onClick={onClick} type="submit">
+            <Button
+              variant="contained"
+              onClick={handleSubmit(onSubmit)}
+              type="submit"
+              disabled={
+                name === '' || description === '' || type === '' ? true : false
+              }
+            >
               Criar
             </Button>
             <Button variant="contained" onClick={onClick}>

@@ -25,7 +25,8 @@ type FormValues = {
 };
 
 export const MyDialog = ({ isOpen, pokemon, onClick }: props) => {
-  const { register, handleSubmit } = useForm<FormValues>();
+  const { register, handleSubmit, getValues } = useForm<FormValues>();
+  const { name, description, type } = getValues();
 
   const onSubmit = async (data: FormValues) => {
     const url = await `http://localhost:5228/api/pokemons/${pokemon.id}`;
@@ -37,6 +38,7 @@ export const MyDialog = ({ isOpen, pokemon, onClick }: props) => {
     setTimeout(() => {
       window.location.reload();
     }, 300);
+    onClick();
   };
 
   return (
@@ -50,7 +52,7 @@ export const MyDialog = ({ isOpen, pokemon, onClick }: props) => {
               type="text"
               id="name"
               defaultValue={pokemon.name}
-              {...register('name')}
+              {...register('name', { required: true })}
             />
             <TextField
               margin="normal"
@@ -68,7 +70,14 @@ export const MyDialog = ({ isOpen, pokemon, onClick }: props) => {
             />
           </Stack>
           <DialogActions>
-            <Button variant="contained" onClick={onClick} type="submit">
+            <Button
+              variant="contained"
+              onClick={handleSubmit(onSubmit)}
+              type="submit"
+              disabled={
+                name === '' || description === '' || type === '' ? true : false
+              }
+            >
               Salvar
             </Button>
             <Button variant="contained" onClick={onClick}>

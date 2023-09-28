@@ -4,7 +4,6 @@ import { theme } from '../../../styles/theme';
 import { MyDialog } from './MyDialog';
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 type props = {
   pokemon: PokemonEntity;
@@ -12,12 +11,13 @@ type props = {
 
 export const MyCard = ({ pokemon }: props) => {
   const [isOpen, setisOpen] = useState(false);
-  const navigate = useNavigate();
 
   const deletePokemon = async () => {
     const url = await `http://localhost:5228/api/pokemons/${pokemon.id}`;
     axios.delete(url);
-    window.location.reload();
+    setTimeout(() => {
+      window.location.reload();
+    }, 300);
   };
 
   return (
